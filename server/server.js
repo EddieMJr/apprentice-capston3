@@ -37,17 +37,10 @@ app.use(
 
 app.use(express.json())
 
-/*
-    INITIALIZE GEMINI AI
-  */
 const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
 })
 
-/*
-   GENERATE PASSWORD SECURITY QUIZ ROUTE
-   removed topic and style parameters, hardcoded to password security
-   */
 app.post("/api/generate-quiz", async (req, res) => {
   const { difficulty, number } = req.body
 
@@ -103,10 +96,6 @@ Only output the numbered questions, nothing else.
   }
 })
 
-/* 
-   EVALUATE ANSWER ROUTE - PASSWORD SECURITY FOCUSED
-   updated to evaluate password security answers
- */
 app.post("/api/evaluate-answer", async (req, res) => {
   const { question, userAnswer } = req.body
 
@@ -158,9 +147,6 @@ Respond **only** in valid JSON:
   }
 })
 
-/* 
-    START SERVER
-*/
 app.listen(PORT, () => {
   console.log(`🚀 Password Security Quiz Server running at http://localhost:${PORT}`)
 })
