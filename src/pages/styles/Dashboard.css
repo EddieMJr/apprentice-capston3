@@ -1,0 +1,83 @@
+/* ---- Global Styles ---- */
+:root {
+    --bg-light: #f5f6fa;
+    --card-bg: #ffffff;
+    --primary: #6c5ce7;
+    --secondary: #1d6657;
+    --text-dark: #2d3436;
+    --text-light: #636e72;
+    --radius: 0.75rem;
+    --shadow: 0px 4px 12px rgba(0,0,0,0.10);
+}
+
+body {
+    background: var(--bg-light);
+    font-family: system-ui, sans-serif;
+}
+
+/* ---- Section Cards ---- */
+.section {
+    background: var(--card-bg);
+    padding: 2rem;
+    margin: 1.5rem 1rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    height: 30vh;
+}
+
+/* ---- Headers ---- */
+.section h2 {
+    text-align: center;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+}
+
+/* ---- Stats Section ---- */
+.stats-grid {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.stat-card {
+    background: var(--primary);
+    color: white;
+    padding: 1.5rem 2rem;
+    border-radius: var(--radius);
+    min-width: 180px;
+    text-align: center;
+    font-weight: 600;
+    box-shadow: var(--shadow);
+}
+
+/* ---- Game Section ---- */
+.game-options {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.game-card {
+    background: var(--secondary);
+    color: white;
+    width: 200px;
+    height: 150px;
+    border-radius: var(--radius);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.15rem;
+    box-shadow: var(--shadow);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    cursor: pointer;
+}
+
+.game-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0px 6px 18px rgba(0,0,0,0.18);
+}
