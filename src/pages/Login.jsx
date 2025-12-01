@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import "../pages/styles/Login.css";
 
 const Login = () => {
@@ -37,7 +37,7 @@ const Login = () => {
     try {
       setLoading(true);
       setErrors({});
-      const res = await fetch("https://greenlens-50r4.onrender.com/api/login", {
+      const res = await fetch("https://localhost:3000/api/accounts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ identifier: username, password }),

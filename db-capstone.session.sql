@@ -9,4 +9,11 @@
 -- );
 
 
-SHOW TABLES;
+-- INSERT INTO accounts (firstName, lastName, username, password, xp, totalAttempts)
+-- VALUES
+-- ('Jack', 'Miller', 'JackieM', 'spidermanFan95!', 120, 15),
+-- ('Mary', 'Smith', 'ssmith', 'gilmoreGirl68!!', 300, 40);
+
+-- SHOW TABLES;
+
+SELECT * FROM accounts;
