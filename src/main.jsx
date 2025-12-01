@@ -6,6 +6,8 @@ import Home from './pages/Home.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import Login from './pages/Login.jsx'
 import Register from './pages/Register.jsx'
+import QuizQuestions from './pages/QuizSetup.jsx'
+import QuizGeneration from './pages/PasswordSecurityQuiz.jsx'
 
 /* Incorporating bootstrap at global level */
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -22,6 +24,7 @@ createRoot(document.getElementById('root')).render(
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
         <Route path='/game' element={<Game />} />
+        <Route path='/quiz' element={<QuizGeneration />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,
