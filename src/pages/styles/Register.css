@@ -1,0 +1,121 @@
+/* ====== MAIN CONTAINER ====== */
+.main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - 90px);
+  background-color: #f8f9fa;
+  padding: 2rem;
+}
+
+/* ====== REGISTER FORM ====== */
+.register--form {
+  width: 100%;
+  max-width: 420px;
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 1rem;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.form--title {
+  margin-bottom: 1.5rem;
+  color: #1E9E1A;
+  font-weight: 700;
+}
+
+/* ====== FORM GROUP ====== */
+.form--group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  margin-bottom: 1.5rem;
+}
+
+/* ====== LABELS (STATIC ABOVE INPUT) ====== */
+.form--group label {
+  font-size: 0.9rem;
+  color: #1E9E1A;
+  margin-bottom: 0.35rem;
+  padding-left: 0.25rem;
+  background-color: transparent;
+}
+
+/* ====== INPUTS ====== */
+.form--group input {
+  width: 100%;
+  border: 1px solid #ced4da;
+  border-radius: 0.5rem;
+  padding: 0.8rem 0.75rem;
+  font-size: 1rem;
+  background-color: #fff;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+/* Focus state */
+.form--group input:focus {
+  outline: none;
+  border-color: #1E9E1A;
+}
+
+/* ====== PLACEHOLDER ====== */
+.form--group input::placeholder {
+  color: #aaa;
+}
+
+/* ====== SUBMIT BUTTON ====== */
+.form-button {
+  background-color: #1E9E1A;
+  color: #fff;
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.form-button:hover {
+  background-color: #157c13;
+}
+
+/* ====== MESSAGE ====== */
+#message {
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  color: #333;
+  font-weight: 500;
+}
+
+/* ====== ERROR TEXT ====== */
+.register--error {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+  animation: fadeIn 0.2s ease-in;
+}
+
+/* ====== ERROR INPUT BORDER ====== */
+.form--group input.input-error {
+  border-color: red !important;
+  box-shadow: 0 0 4px rgba(255, 0, 0, 0.3);
+}
+
+/* ====== ANIMATION ====== */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ====== RESPONSIVE ====== */
+@media (max-width: 480px) {
+  .register--form {
+    padding: 1.5rem;
+  }
+}
