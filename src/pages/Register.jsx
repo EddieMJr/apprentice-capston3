@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import "../pages/styles/Register.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Register() {
+const Navigate = useNavigate()
+
   const [formData, setFormData] = useState({
     username: "",
     email: "",
@@ -96,6 +99,11 @@ export default function Register() {
 
       if (!res.ok) {
         throw new Error(data.error || "Registration failed.");
+      } else {
+        setMessage("Registered! Redirecting to Login Page...")
+        setErrors(false)
+        // smooth redirection
+        setTimeout(() => Navigate("/login"), 1500);
       }
 
       setMessage("Registration successful! You can now log in.");
