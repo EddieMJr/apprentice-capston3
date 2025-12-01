@@ -10,6 +10,7 @@ import Register from './pages/Register.jsx'
 /* Incorporating bootstrap at global level */
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
+import Game from './components/game.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -20,6 +21,7 @@ createRoot(document.getElementById('root')).render(
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/login' element={<Login />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/game' element={<Game />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,
