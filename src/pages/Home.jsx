@@ -44,7 +44,7 @@ function Home() {
                 className="btn btn-light btn-lg px-4"
                 onClick={() => scrollToSection("featured-password")}
               >
-                Password Cracker
+                Password Evaluator
               </button>
             </div>
           </div>
