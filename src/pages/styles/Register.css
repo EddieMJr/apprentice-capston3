@@ -19,9 +19,10 @@
   text-align: center;
 }
 
+/* ====== FORM TITLE ====== */
 .form--title {
   margin-bottom: 1.5rem;
-  color: #1E9E1A;
+  color: #BB7420; /* PRIMARY ORANGE */
   font-weight: 700;
 }
 
@@ -34,10 +35,10 @@
   margin-bottom: 1.5rem;
 }
 
-/* ====== LABELS (STATIC ABOVE INPUT) ====== */
+/* ====== LABELS ====== */
 .form--group label {
   font-size: 0.9rem;
-  color: #1E9E1A;
+  color: #BB7420; /* PRIMARY ORANGE */
   margin-bottom: 0.35rem;
   padding-left: 0.25rem;
   background-color: transparent;
@@ -58,7 +59,7 @@
 /* Focus state */
 .form--group input:focus {
   outline: none;
-  border-color: #1E9E1A;
+  border-color: #BB7420; /* PRIMARY ORANGE */
 }
 
 /* ====== PLACEHOLDER ====== */
@@ -68,7 +69,7 @@
 
 /* ====== SUBMIT BUTTON ====== */
 .form-button {
-  background-color: #1E9E1A;
+  background-color: #BB7420; /* PRIMARY ORANGE */
   color: #fff;
   border: none;
   border-radius: 0.5rem;
@@ -80,11 +81,18 @@
   transition: background-color 0.2s ease;
 }
 
-.form-button:hover {
-  background-color: #157c13;
+/* Hover → SECONDARY ORANGE */
+.form-button:hover:not(:disabled) {
+  background-color: #D98A2F; /* HOVER ORANGE */
 }
 
-/* ====== MESSAGE ====== */
+/* Disabled button state */
+.form-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ====== SUCCESS / ERROR MESSAGE ====== */
 #message {
   margin-bottom: 1rem;
   font-size: 0.95rem;

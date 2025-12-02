@@ -36,11 +36,10 @@
   margin-bottom: 1.5rem;
 }
 
-/* ====== LABEL (STATIC ABOVE INPUT) ====== */
 .form-floating label {
   font-size: 0.9rem;
-  color: #1E9E1A;
-  margin-bottom: 0.35rem; /* ensures spacing */
+  color: #BB7420;
+  margin-bottom: 0.35rem;
   padding-left: 0.25rem;
   background-color: transparent;
 }
@@ -57,13 +56,11 @@
   box-sizing: border-box;
 }
 
-/* Focused input border color */
 .form-floating input:focus {
   outline: none;
-  border-color: #1E9E1A;
+  border-color: #BB7420;
 }
 
-/* Hide placeholder so it doesn’t interfere */
 .form-floating input::placeholder {
   color: transparent;
 }
@@ -78,7 +75,6 @@
   color: red;
 }
 
-/* ====== ERROR TEXT ====== */
 .error-text {
   color: red;
   font-size: 0.85rem;
@@ -87,21 +83,29 @@
   animation: fadeIn 0.2s ease-in;
 }
 
-/* ====== BUTTON ====== */
-.btn-success {
-  background-color: #1E9E1A;
+/* ====== NEW BUTTON (ORANGE BRAND COLOR) ====== */
+.login-btn {
+  background-color: #BB7420 !important;
+  color: white !important;
   border: none;
   font-weight: 600;
   border-radius: 0.5rem;
-  transition: background-color 0.2s ease;
   padding: 0.6rem 0;
+  transition: background-color 0.2s ease;
 }
 
-.btn-success:hover {
-  background-color: #157c13;
+.login-btn:hover {
+  background-color: #D98A2F !important;
 }
 
-/* ====== CHECKBOX + TEXT ====== */
+.login-btn:focus,
+.login-btn:active,
+.login-btn:focus-visible {
+  background-color: #BB7420 !important;
+  box-shadow: none !important;
+}
+
+/* ====== CHECKBOX ====== */
 .checkbox label {
   font-size: 0.9rem;
   color: #555;
@@ -113,7 +117,7 @@
 }
 
 .create-account-link {
-  color: #1E9E1A;
+  color: #BB7420;
   text-decoration: none;
   font-weight: 500;
 }
