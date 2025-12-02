@@ -31,9 +31,6 @@ const Navbar = () => {
 
         {/* Nav menu (Home, Scanner, and mobile Login/Register) */}
         <ul className={`nav-menu ${isOpen ? 'open' : ''}`}>
-          <li><Link to="/" onClick={handleLinkClick}>Home</Link></li>
-          <li><Link to="/Quiz" onClick={handleLinkClick}>Quiz</Link></li>
-          <li><Link to="/Game" onClick={handleLinkClick}>Game</Link></li>
           <li className="mobile-only"><Link to="/login" onClick={handleLinkClick}>Login</Link></li>
           <li className="mobile-only"><Link to="/register" onClick={handleLinkClick}>Register</Link></li>
         </ul>

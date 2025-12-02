@@ -1,16 +1,28 @@
 import './styles/Navbar.css'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
+  const navigate = useNavigate()
 
-  // Close menu when any link is clicked
   const handleLinkClick = () => setIsOpen(false)
+
+  const handleLogout = () => {
+    // Clear user/auth data
+    localStorage.removeItem("user")
+    localStorage.removeItem("token")
+    sessionStorage.clear()
+
+    // Redirect to homepage
+    navigate("/")
+
+    // Close mobile menu
+    setIsOpen(false)
+  }
 
   return (
     <nav className="navbar">
-      {/* LEFT SIDE: Logo + Nav Links */}
       <div className="nav-left">
         <div className="logo">
           <Link to="/" onClick={handleLinkClick}>
@@ -18,7 +30,6 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {/* Hamburger (visible only on mobile) */}
         <button
           className="menu-toggle"
           onClick={() => setIsOpen(!isOpen)}
@@ -29,20 +40,20 @@ const Navbar = () => {
           <span className="bar"></span>
         </button>
 
-        {/* Nav menu (Home, Scanner, and mobile Login/Register) */}
         <ul className={`nav-menu ${isOpen ? 'open' : ''}`}>
-          <li><Link to="/" onClick={handleLinkClick}>Home</Link></li>
-          <li><Link to="/Knowledge Quiz" onClick={handleLinkClick}>Quiz</Link></li>
-          <li><Link to="/Password Cracker" onClick={handleLinkClick}>Game</Link></li>
-          <li className="mobile-only"><Link to="/login" onClick={handleLinkClick}>Login</Link></li>
-          <li className="mobile-only"><Link to="/register" onClick={handleLinkClick}>Register</Link></li>
+          <li className="mobile-only">
+            <Link to="/dashboard" onClick={handleLinkClick}>Dashboard</Link>
+          </li>
+
+          <li className="mobile-only">
+            <button onClick={handleLogout}>Logout</button>
+          </li>
         </ul>
       </div>
 
-      {/* RIGHT SIDE (Desktop only) */}
       <div className="nav-login desktop-only">
         <Link to="/dashboard"><button>Dashboard</button></Link>
-        <Link to="/logout"><button>Logout</button></Link>
+        <button onClick={handleLogout}>Logout</button>
       </div>
     </nav>
   )
