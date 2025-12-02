@@ -33,7 +33,7 @@ export default function QuizGame({ quizData, onFinish }) {
 
     setSubmitting(true)
     try {
-      const res = await fetch("http://localhost:4000/api/evaluate-answer", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/evaluate-answer`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

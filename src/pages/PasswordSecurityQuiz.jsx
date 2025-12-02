@@ -18,7 +18,7 @@ export default function PasswordSecurityQuiz() {
 
   const handleStartQuiz = async (expertise, numQuestions) => {
     try {
-      const res = await fetch("http://localhost:4000/api/generate-quiz", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/generate-quiz`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
