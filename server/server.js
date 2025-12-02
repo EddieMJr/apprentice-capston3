@@ -4,6 +4,7 @@ import dotenv from "dotenv"
 import { GoogleGenAI } from "@google/genai"
 import db from'./db.js'
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken'
 
 dotenv.config()
 const app = express()
@@ -38,6 +39,19 @@ app.use(
 )
 
 app.use(express.json())
+
+function authenticateToken(req, res, next) {
+  const authHeader = req.headers['authorization']
+  const token = authHeader && authHeader.split(' ')[1] // Expect: "Bearer <token>"
+
+  if (!token) return res.status(401).json({ error: "Token missing" })
+
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) return res.status(403).json({ error: "Invalid token" })
+    req.user = user // store user info in req.user
+    next()
+  })
+}
 
 app.post("/api/register", async (req, res) => {
   const { username, email, firstName, lastName, password } = req.body;
@@ -86,8 +100,10 @@ app.post("/api/login", async (req, res) => {
   }
 
   try {
-    // Look up the user in the database
-    const [rows] = await db.query("SELECT * FROM accounts WHERE username = ?", [username]);
+    const [rows] = await db.query(
+      "SELECT * FROM accounts WHERE username = ?",
+      [username]
+    );
 
     if (rows.length === 0) {
       return res.status(401).json({ error: "Invalid username or password." });
@@ -95,17 +111,23 @@ app.post("/api/login", async (req, res) => {
 
     const user = rows[0];
 
-    // Check if password matches
+    // Check password
     const isMatch = await bcrypt.compare(password, user.password);
-
     if (!isMatch) {
       return res.status(401).json({ error: "Invalid username or password." });
     }
 
-    // Remove password before sending user data
+    // Remove password
     const { password: _, ...userWithoutPassword } = user;
 
-    res.json({ message: "Login successful!", user: userWithoutPassword });
+    // CREATE JWT TOKEN HERE
+    const token = jwt.sign(
+      { id: user.id, username: user.username },
+      process.env.JWT_SECRET,
+      { expiresIn: "7d" }
+    );
+
+    res.json({ message: "Login successful!", token, user: userWithoutPassword });
   } catch (err) {
     console.error("❌ Login error:", err);
     res.status(500).json({ error: "Server error. Please try again." });
@@ -119,6 +141,37 @@ app.get("/api/accounts", async (req, res) => {
   } catch (err) {
     console.error("❌ Failed to fetch accounts:", err);
     res.status(500).json({ error: "Failed to fetch accounts." });
+  }
+});
+
+app.post("/api/update-stats", authenticateToken, async (req, res) => {
+  const { xpToAdd } = req.body;
+
+  if (typeof xpToAdd !== "number") {
+    return res.status(400).json({ error: "xpToAdd is required and must be a number." });
+  }
+
+  try {
+    const [result] = await db.query(
+      `UPDATE accounts 
+       SET xp = xp + ?, totalAttempts = totalAttempts + 1 
+       WHERE id = ?`,
+      [xpToAdd, req.user.id]
+    );
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "User not found." });
+    }
+
+    const [updatedRows] = await db.query(
+      "SELECT id, username, xp, totalAttempts FROM accounts WHERE id = ?",
+      [req.user.id]
+    );
+
+    res.json({ message: "Stats updated successfully!", user: updatedRows[0] });
+  } catch (err) {
+    console.error("❌ Update stats error:", err);
+    res.status(500).json({ error: "Server error. Could not update stats." });
   }
 });
 
