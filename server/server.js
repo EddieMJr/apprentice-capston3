@@ -17,7 +17,8 @@ const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:3000",
   "https://lrnr-1.onrender.com",
-  "https://main.d1ofx20e09tklh.amplifyapp.com/",
+  "https://main.d1ofx20e09tklh.amplifyapp.com",
+  "https://capstone-backend-ryte.onrender.com",
   /^https:\/\/preview-.*\.vusercontent\.net$/,
 ]
 
