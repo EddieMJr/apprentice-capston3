@@ -2,6 +2,8 @@ import express from "express"
 import cors from "cors"
 import dotenv from "dotenv"
 import { GoogleGenAI } from "@google/genai"
+import db from'./db.js'
+import bcrypt from 'bcrypt'
 
 dotenv.config()
 const app = express()
@@ -36,6 +38,89 @@ app.use(
 )
 
 app.use(express.json())
+
+app.post("/api/register", async (req, res) => {
+  const { username, email, firstName, lastName, password } = req.body;
+
+  if (!username || !email || !firstName || !lastName || !password) {
+    return res.status(400).json({ error: "All fields are required." });
+  }
+
+  try {
+    // Check if username or email already exists
+    const [existing] = await db.query(
+      "SELECT id FROM accounts WHERE username = ? OR email = ?",
+      [username, email]
+    );
+
+    if (existing.length > 0) {
+      return res.status(400).json({
+        error: "Username or email already exists.",
+      });
+    }
+
+    // Hash password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Insert new user
+    await db.query(
+      `INSERT INTO accounts (username, email, firstName, lastName, password, xp, totalAttempts)
+       VALUES (?, ?, ?, ?, ?, 0, 0)`,
+      [username, email, firstName, lastName, hashedPassword]
+    );
+
+    console.log("New user registered:", username);
+
+    return res.status(201).json({ message: "Registration successful!" });
+  } catch (err) {
+    console.error("❌ Registration Error:", err);
+    return res.status(500).json({ error: "Server error. Try again." });
+  }
+});
+
+app.post("/api/login", async (req, res) => {
+  const { username, password } = req.body;
+
+  if (!username || !password) {
+    return res.status(400).json({ error: "Username and password are required." });
+  }
+
+  try {
+    // Look up the user in the database
+    const [rows] = await db.query("SELECT * FROM accounts WHERE username = ?", [username]);
+
+    if (rows.length === 0) {
+      return res.status(401).json({ error: "Invalid username or password." });
+    }
+
+    const user = rows[0];
+
+    // Check if password matches
+    const isMatch = await bcrypt.compare(password, user.password);
+
+    if (!isMatch) {
+      return res.status(401).json({ error: "Invalid username or password." });
+    }
+
+    // Remove password before sending user data
+    const { password: _, ...userWithoutPassword } = user;
+
+    res.json({ message: "Login successful!", user: userWithoutPassword });
+  } catch (err) {
+    console.error("❌ Login error:", err);
+    res.status(500).json({ error: "Server error. Please try again." });
+  }
+});
+
+app.get("/api/accounts", async (req, res) => {
+  try {
+    const [rows] = await db.query("SELECT id, username, email, firstName, lastName, xp, totalAttempts FROM accounts");
+    res.json({ accounts: rows });
+  } catch (err) {
+    console.error("❌ Failed to fetch accounts:", err);
+    res.status(500).json({ error: "Failed to fetch accounts." });
+  }
+});
 
 const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,

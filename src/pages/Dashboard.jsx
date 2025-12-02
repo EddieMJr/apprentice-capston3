@@ -1,25 +1,38 @@
-import React from "react";
+import React, { useState, useEffect} from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './styles/Dashboard.css'
 
 function Dashboard() {
-  const user = {
-    firstName: "Eddie",
-    xp: 55,
-    totalAttempts: 11,
-  };
+  const [user, setUser] = useState(null)
+  const [leaderboard, setLeaderboard] = useState([])
 
-  const leaderboard = [
-    { name: "Niaria", xp: 120 },
-    { name: "Amy", xp: 95 },
-    { name: "Edgardo", xp: 85 },    
-    { name: "Khang", xp: 75 },
-    { name: "Eduardo", xp: 70 },
-    { name: "Michael", xp: 60 },    
-    { name: "Dakota", xp: 55 },
-    { name: "Eddie", xp: 55 },
-    { name: "Jane", xp: 50 },
-  ];
+  useEffect(() => {
+    // Fetch all accounts
+    const fetchAccounts = async () => {
+      try {
+        const res = await fetch("http://localhost:4000/api/accounts");
+        const data = await res.json();
+
+        if (res.ok) {
+          // Example: current logged-in user stored in localStorage
+          const currentUser = JSON.parse(localStorage.getItem("user"));
+          setUser(currentUser);
+
+          // Sort by XP descending for leaderboard
+          const sorted = data.accounts.sort((a, b) => b.xp - a.xp);
+          setLeaderboard(sorted);
+        } else {
+          console.error(data.error);
+        }
+      } catch (err) {
+        console.error("Error fetching accounts:", err);
+      }
+    };
+
+    fetchAccounts();
+  }, []);
+
+  if (!user) return <p>Loading...</p>;
 
   return (
     <div className="container py-4">
@@ -101,7 +114,7 @@ function Dashboard() {
                 {leaderboard.map((player, index) => (
                   <tr key={index}>
                     <td>{index + 1}</td>
-                    <td>{player.name}</td>
+                    <td>{player.username}</td>
                     <td>{player.xp}</td>
                   </tr>
                 ))}
