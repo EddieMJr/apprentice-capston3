@@ -9,7 +9,7 @@ import Login from './pages/Login.jsx'
 import Register from './pages/Register.jsx'
 import QuizQuestions from './pages/QuizSetup.jsx'
 import QuizGeneration from './pages/PasswordSecurityQuiz.jsx'
-import Game from './components/game.jsx'
+import Game from './components/Game.jsx'
 
 import Footer from './components/Footer.jsx'   
 
