@@ -20,10 +20,9 @@
 }
 
 .logo img {
-  width: 120px;
+  width: 75px;   /* was 120px */
   height: auto;
   cursor: pointer;
-  /* filter: brightness(0) invert(1); make logo visible on dark background */
 }
 
 /* ========== NAV MENU ========== */
@@ -45,18 +44,19 @@
 }
 
 .nav-menu li a:hover {
-  color: #1E9E1A; /* GreenLens green */
+  color: #BB7420
 }
 
 /* ========== LOGIN / REGISTER (DESKTOP) ========== */
 .nav-login {
   display: flex;
   gap: 1rem;
+  padding-right: 1rem;
 }
 
 .nav-login button {
-  border: 1px solid #1E9E1A;
-  background-color: #1E9E1A;
+  border: 1px solid #BB7420;
+  background-color: #BB7420;
   color: #fff;
   padding: 0.5rem 1.2rem;
   border-radius: 25px;
@@ -66,8 +66,8 @@
 }
 
 .nav-login button:hover {
-  background-color: #157c13;
-  border-color: #157c13;
+  background-color: #D98A2F;
+  border-color: #D98A2F;
 }
 
 /* ========== HAMBURGER MENU (Mobile) ========== */
@@ -86,7 +86,7 @@
 .bar {
   height: 3px;
   width: 100%;
-  background-color: #fff; /* white bars for contrast */
+  background-color: #fff;
   border-radius: 2px;
 }
 
@@ -95,15 +95,14 @@
   display: none;
 }
 
-/* Hide desktop-only content on mobile */
 .desktop-only {
   display: flex;
 }
 
-/* ========== RESPONSIVE ========== */
+/* ========== RESPONSIVE BREAKPOINTS ========== */
 @media (max-width: 992px) {
   .logo img {
-    width: 110px;
+    width: 65px; /* was 110px */
   }
 
   .nav-menu {
@@ -111,7 +110,6 @@
   }
 }
 
-/* ===== MOBILE ===== */
 @media (max-width: 768px) {
   .menu-toggle {
     display: flex;
@@ -128,7 +126,7 @@
     left: 0;
     width: 100%;
     flex-direction: column;
-    background-color: #000; /* match navbar background */
+    background-color: #000;
     text-align: center;
     gap: 1.5rem;
     padding: 1.5rem 0;
@@ -145,12 +143,10 @@
     transform: translateY(0);
   }
 
-  /* Hide desktop buttons */
   .desktop-only {
     display: none;
   }
 
-  /* Show mobile links inside dropdown */
   .mobile-only {
     display: block;
   }
@@ -161,14 +157,17 @@
   }
 
   .nav-menu li a:hover {
-    color: #1E9E1A;
+    color: #D98A2F;
+  }
+
+  .logo img {
+    width: 55px; /* additional mobile resize */
   }
 }
 
-/* Extra small screens */
 @media (max-width: 480px) {
   .logo img {
-    width: 90px;
+    width: 45px; /* smallest screens */
   }
 
   .nav-menu {

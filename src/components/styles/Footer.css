@@ -1,0 +1,8 @@
+.footer {
+  font-size: 0.9rem;
+}
+
+.social-icon:hover {
+  color: #000 !important;
+  text-decoration: none;
+}

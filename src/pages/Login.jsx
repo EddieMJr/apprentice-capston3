@@ -65,7 +65,7 @@ const Login = () => {
   return (
     <main className="login-container">
       <form className="login-form" onSubmit={handleSubmit}>
-        <img className="mb-4 login-logo" src="/Lockbox-Logo.svg" alt="LockBox logo"/>
+        <img className="mb-4 login-logo" src="/capstone.png" alt="LockBox logo"/>
         <h1 className="h3 mb-3 fw-normal">Please Login</h1>
 
         {message && <p className="form-message">{message}</p>}
@@ -104,8 +104,9 @@ const Login = () => {
           </label>
         </div>
 
+        {/* UPDATED BUTTON */}
         <button
-          className="btn btn-success w-100 py-2"
+          className="btn login-btn w-100 py-2"
           type="submit"
           disabled={loading}
         >
@@ -126,3 +127,4 @@ const Login = () => {
 };
 
 export default Login;
+

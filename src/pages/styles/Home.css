@@ -1,7 +1,12 @@
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
 /* --- HERO SECTION --- */
 .hero-container {
   position: relative;
-  height: 60vh; 
+  height: 60vh;
   max-height: 520px;
   overflow: hidden;
   display: flex;
@@ -9,7 +14,6 @@
   align-items: center;
 }
 
-/* Background video */
 .hero-video {
   position: absolute;
   top: 50%;
@@ -22,7 +26,6 @@
   pointer-events: none;
 }
 
-/* Dark overlay */
 .hero-overlay {
   position: absolute;
   top: 0;
@@ -33,41 +36,66 @@
   z-index: -1;
 }
 
-/* Content on top */
 .hero-content {
   position: relative;
   z-index: 5;
 }
 
-/* Restore solid button colors */
-
-.btn-cyber-primary {
-  background-color: #0d6efd;   /* Bootstrap primary blue */
-  color: white;
-  border: none;
+/* Smaller hero subheading */
+.subheading {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin-top: -10px;
 }
-
-.btn-cyber-primary:hover {
-  background-color: #0b5ed7;
-}
-
-.btn-outline-light {
-  background-color: rgba(255, 255, 255, 0.15); /* Light frosted style */
-  color: white;
-  border: 1px solid #fff;
-}
-
-.btn-outline-light:hover {
-  background-color: rgba(255, 255, 255, 0.3);
-  color: white;
-}
-
 
 body {
   background-color: #0c0c0c;
   color: white;
 }
 
-.featurette-divider {
-  border-color: #333;
+/* --- FEATURE SECTION STYLES --- */
+.features-section {
+  background-color: white;
+  color: #0c0c0c;
 }
+
+.section-title {
+  color: #BB7420;
+}
+
+.feature-icon {
+  font-size: 2rem;
+  margin-right: 1rem;
+  color: #BB7420;
+}
+
+.feature-item p {
+  color: #444;
+}
+
+/* Button styles */
+.btn-primary {
+  background-color: #BB7420 !important;
+  border-color: #BB7420 !important;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #D98A2F !important;
+  border-color: #D98A2F !important;
+  color: white !important;
+}
+
+/* Outline button */
+.btn-outline-orange {
+  border: 2px solid #BB7420;
+  color: #BB7420;
+  background: transparent;
+}
+
+.btn-outline-orange:hover,
+.btn-outline-orange:focus {
+  background-color: #BB7420;
+  color: white;
+}
+
