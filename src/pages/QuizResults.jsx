@@ -39,7 +39,7 @@ export default function QuizResults({ stats, onRetry }) {
           xpToAdd: stats.totalXp,
         })
 
-        const res = await fetch("http://localhost:4000/api/update-stats", {
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/update-stats`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

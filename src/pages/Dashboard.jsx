@@ -10,7 +10,7 @@ function Dashboard() {
     // Fetch all accounts
     const fetchAccounts = async () => {
       try {
-        const res = await fetch("http://localhost:4000/api/accounts");
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/accounts`);
         const data = await res.json();
 
         if (res.ok) {
