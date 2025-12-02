@@ -37,23 +37,23 @@ const Login = () => {
     try {
       setLoading(true);
       setErrors({});
-      const res = await fetch("https://localhost:3000/api/accounts", {
+      const res = await fetch("http://localhost:4000/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ identifier: username, password }),
+        body: JSON.stringify({ username, password }),
       });
 
       const data = await res.json();
 
       if (!res.ok) {
         throw new Error(data.error || "Invalid username or password.");
-      }
+      } 
 
       setMessage("Login successful!");
       localStorage.setItem("user", JSON.stringify(data.user));
 
       setTimeout(() => {
-        window.location.href = "/";
+        window.location.href = "/dashboard";
       }, 1000);
     } catch (err) {
       setMessage(`Error: ${err.message}`);

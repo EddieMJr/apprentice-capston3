@@ -8,8 +8,8 @@ const Navigate = useNavigate()
   const [formData, setFormData] = useState({
     username: "",
     email: "",
-    first_name: "",
-    last_name: "",
+    firstName: "",
+    lastName: "",
     password: "",
   });
 
@@ -39,31 +39,31 @@ const Navigate = useNavigate()
   const validateForm = () => {
     const newErrors = {};
 
-    // Username
+    // username
     if (!formData.username.trim()) {
       newErrors.username = "Username is required.";
     } else if (formData.username.length < 3) {
       newErrors.username = "Username must be at least 3 characters.";
     }
 
-    // Email
+    // email
     if (!formData.email.trim()) {
       newErrors.email = "Email is required.";
     } else if (!emailRegex.test(formData.email)) {
       newErrors.email = "Please enter a valid email address.";
     }
 
-    // First name
-    if (!formData.first_name.trim()) {
+    // first name
+    if (!formData.firstName.trim()) {
       newErrors.first_name = "First name is required.";
     }
 
-    // Last name
-    if (!formData.last_name.trim()) {
+    // last name
+    if (!formData.lastName.trim()) {
       newErrors.last_name = "Last name is required.";
     }
 
-    // Password
+    // password
     if (!formData.password) {
       newErrors.password = "Password is required.";
     } else if (!passwordRegex.test(formData.password)) {
@@ -89,7 +89,7 @@ const Navigate = useNavigate()
       setErrors({});
       setMessage("");
 
-      const res = await fetch("https://greenlens-50r4.onrender.com/api/register", {
+      const res = await fetch("http://localhost:4000/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
@@ -110,8 +110,8 @@ const Navigate = useNavigate()
       setFormData({
         username: "",
         email: "",
-        first_name: "",
-        last_name: "",
+        firstName: "",
+        lastName: "",
         password: "",
       });
     } catch (err) {
@@ -159,13 +159,13 @@ const Navigate = useNavigate()
 
           {/* First Name */}
           <div className="form--group">
-            <label htmlFor="first_name">First Name</label>
+            <label htmlFor="firstName">First Name</label>
             <input
               type="text"
-              id="first_name"
-              name="first_name"
+              id="firstName"
+              name="firstName"
               placeholder="John"
-              value={formData.first_name}
+              value={formData.firstName}
               onChange={handleChange}
             />
             {errors.first_name && <p className="register--error">{errors.first_name}</p>}
@@ -173,13 +173,13 @@ const Navigate = useNavigate()
 
           {/* Last Name */}
           <div className="form--group">
-            <label htmlFor="last_name">Last Name</label>
+            <label htmlFor="lastName">Last Name</label>
             <input
               type="text"
-              id="last_name"
-              name="last_name"
+              id="lastName"
+              name="lastName"
               placeholder="Doe"
-              value={formData.last_name}
+              value={formData.lastName}
               onChange={handleChange}
             />
             {errors.last_name && <p className="register--error">{errors.last_name}</p>}
