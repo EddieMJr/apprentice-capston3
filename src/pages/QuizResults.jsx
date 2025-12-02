@@ -1,9 +1,14 @@
 "use client"
 
+import { useState, useEffect, useRef } from "react"
+
 export default function QuizResults({ stats, onRetry }) {
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
+  const [userStats, setUserStats] = useState(null)
   const accuracy =
     stats.correct + stats.wrong > 0 ? Math.round((stats.correct / (stats.correct + stats.wrong)) * 100) : 0
-
+  
   const getResultMessage = (accuracy) => {
     if (accuracy === 100) return "Perfect! You're a security master! 👑"
     if (accuracy >= 80) return "Excellent! Great security knowledge! 🌟"
@@ -12,6 +17,60 @@ export default function QuizResults({ stats, onRetry }) {
     return "Keep learning! You'll get there! 🚀"
   }
 
+   const hasUpdated = useRef(false)
+   useEffect(() => {
+    if (hasUpdated.current) return
+    hasUpdated.current = true
+    console.log("➡️ QuizResults mounted with stats:", stats)
+
+    const submitStats = async () => {
+      console.log("➡️ Running submitStats()...")
+
+      const token = localStorage.getItem("token")
+      if (!token) {
+        console.log("❌ No token found")
+        setError("User is not logged in")
+        setLoading(false)
+        return
+      }
+
+      try {
+        console.log("📡 Sending stats to backend:", {
+          xpToAdd: stats.totalXp,
+        })
+
+        const res = await fetch("http://localhost:4000/api/update-stats", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({ xpToAdd: stats.totalXp }),
+        })
+
+        const data = await res.json()
+        localStorage.setItem('user', JSON.stringify(data.user))
+        console.log("📥 Backend responded:", data)
+
+        if (!res.ok) {
+          setError(data.error || "Failed to update stats")
+        } else {
+          setUserStats({
+            xp: data.user.xp,
+            totalAttempts: data.user.totalAttempts,
+          })
+        }
+      } catch (err) {
+        console.error("❌ Failed to update stats:", err)
+        setError("Failed to update stats.")
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    submitStats()
+  }, [])
+
   return (
     <div className="results-wrapper">
       <div className="results-card">
@@ -19,6 +78,9 @@ export default function QuizResults({ stats, onRetry }) {
           <h1 className="results-title">Quiz Complete!</h1>
           <p className="results-message">{getResultMessage(accuracy)}</p>
         </div>
+
+        {loading && <p>Updating your XP..</p>}
+        {error && <p>{error}</p>}
 
         <div className="stats-grid">
           <div className="stat-box xp-stat">
