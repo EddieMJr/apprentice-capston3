@@ -54,7 +54,11 @@ const Login = () => {
       localStorage.setItem("user", JSON.stringify(data.user));
 
       setTimeout(() => {
-        window.location.href = "/dashboard";
+        if (data.user.role === "admin") {
+          window.location.href = "/adminDashboard";
+        } else {
+          window.location.href = "/dashboard"
+        }
       }, 1000);
     } catch (err) {
       setMessage(`Error: ${err.message}`);
