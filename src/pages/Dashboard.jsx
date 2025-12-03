@@ -9,7 +9,7 @@ function Dashboard() {
   useEffect(() => {
     const fetchAccounts = async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/accounts`);
+        const res = await fetch(`${import.meta.env.VITE_API_URL}/api/leaderboard`);
         const data = await res.json();
 
         if (res.ok) {

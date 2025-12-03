@@ -29,15 +29,17 @@
 -- ("Edgardo", "Torres", "ETnotTheAlien", "et@example.com", "$2b$10$uT1MZLJH0t2FpNcV7JqKauz6q8N3PVxFrRg5jB7RR3D1gr5pPDn9e", 5, 2);
 
 -- UPDATE accounts
--- SET role = 'admin'
+-- SET role = 'user'
 -- WHERE username = 'eddiemjr';
 
 -- UPDATE accounts
--- SET role = 'admin'
+-- SET role = 'user'
 -- WHERE username = 'MrET';
 
 -- UPDATE accounts
 -- SET role = 'admin'
--- WHERE username = 'amy_account';
+-- WHERE username = 'adm!n';
 
-SELECT * FROM accounts;
+-- SELECT * FROM accounts;
+
+-- SELECT id, username, email, firstName, lastName, xp, totalAttempts, role FROM accounts WHERE role != 'admin' ORDER BY xp DESC
