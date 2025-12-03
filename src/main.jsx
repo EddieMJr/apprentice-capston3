@@ -4,7 +4,7 @@ import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom"
 
 import Navbar from "./components/Navbar.jsx"
 import NavbarUser from "./components/NavbarUser.jsx"
-import NavbarAdmin from "./components/NavbarAdmin.jsx"  
+import NavbarAdmin from "./components/NavbarAdmin.jsx"
 
 import Home from "./pages/Home.jsx"
 import Dashboard from "./pages/Dashboard.jsx"
@@ -27,23 +27,28 @@ function Layout() {
   // Navbar routing groups
   const guestPages = ["/", "/login", "/register"]
   const userPages = ["/dashboard", "/game", "/quiz"]
-  const adminPages = ["/admindashboard"]       
+  const adminPages = ["/admin"] 
 
   return (
     <>
       {/* Display correct navbar */}
       {guestPages.includes(path) && <Navbar />}
       {userPages.includes(path) && <NavbarUser />}
-      {adminPages.includes(path) && <NavbarAdmin />}  
+      {adminPages.includes(path) && <NavbarAdmin />}
 
       <Routes>
+        {/* Public routes */}
         <Route path="/" element={<Home />} />
-        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+
+        {/* User routes */}
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/game" element={<Game />} />
         <Route path="/quiz" element={<QuizGeneration />} />
-        <Route path="/admindashboard" element={<AdminDashboard />} />
+
+        {/* Admin route */}
+        <Route path="/admin" element={<AdminDashboard />} />
       </Routes>
 
       <Footer />

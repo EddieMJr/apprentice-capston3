@@ -55,7 +55,7 @@ const Login = () => {
 
       setTimeout(() => {
         if (data.user.role === "admin") {
-          window.location.href = "/adminDashboard";
+          window.location.href = "/admin";
         } else {
           window.location.href = "/dashboard"
         }
