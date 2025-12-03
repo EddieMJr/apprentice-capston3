@@ -6,10 +6,15 @@ export default function AdminDashboard() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch all users
+    // Fetch all users
   const fetchUsers = async () => {
     try {
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/accounts`);
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/api/accounts`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      });
+
       const data = await res.json();
 
       if (res.ok) {
@@ -31,11 +36,16 @@ export default function AdminDashboard() {
     try {
       const res = await fetch(
         `${import.meta.env.VITE_API_URL}/api/accounts/${userId}`,
-        { method: "DELETE" }
+        {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
 
       if (res.ok) {
-        setUsers(users.filter((u) => u.id !== userId));
+        setUsers((prev) => prev.filter((u) => u.id !== userId));
       } else {
         console.error("Failed to delete user");
       }
@@ -43,6 +53,7 @@ export default function AdminDashboard() {
       console.error("Error deleting user:", err);
     }
   };
+
 
   useEffect(() => {
     fetchUsers();

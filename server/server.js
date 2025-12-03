@@ -113,18 +113,15 @@ app.post("/api/login", async (req, res) => {
 
     const user = rows[0];
 
-    // Check password
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(401).json({ error: "Invalid username or password." });
     }
 
-    // Remove password
     const { password: _, ...userWithoutPassword } = user;
 
-    // CREATE JWT TOKEN HERE
     const token = jwt.sign(
-      { id: user.id, username: user.username, firstName: user.firstName },
+      { id: user.id, username: user.username, firstName: user.firstName, role: user.role },
       process.env.JWT_SECRET,
       { expiresIn: "7d" }
     );
@@ -145,9 +142,9 @@ app.post("/api/login", async (req, res) => {
   }
 });
 
-app.get("/api/accounts", async (req, res) => {
+app.get("/api/leaderboard", async (req, res) => {
   try {
-    const [rows] = await db.query("SELECT id, username, email, firstName, lastName, xp, totalAttempts, role FROM accounts");
+    const [rows] = await db.query(`SELECT id, username, email, firstName, lastName, xp, totalAttempts, role FROM accounts WHERE role != 'admin' ORDER BY xp DESC`);
     res.json({ accounts: rows });
   } catch (err) {
     console.error("❌ Failed to fetch accounts:", err);
@@ -301,6 +298,51 @@ Respond **only** in valid JSON:
     res.status(500).json({ error: "Failed to evaluate answer." })
   }
 })
+
+function requireAdmin(req, res, next) {
+  if (req.user.role !== "admin") {
+    return res.status(403).json({ error: "Access denied: admin only." });
+  }
+  next();
+}
+
+app.get("/api/accounts", authenticateToken, requireAdmin, async (req, res) => {
+  try {
+    const [rows] = await db.query(
+      `SELECT id, username, email, firstName, lastName, xp, totalAttempts, role 
+       FROM accounts`
+    );
+
+    res.json({ accounts: rows });
+
+  } catch (err) {
+    console.error("❌ Failed to fetch accounts:", err);
+    res.status(500).json({ error: "Failed to fetch accounts." });
+  }
+});
+
+app.delete("/api/accounts/:id", authenticateToken, requireAdmin, async (req, res) => {
+  const userId = req.params.id;
+
+  try {
+    // Prevents admin from deleting themselves
+    if (parseInt(userId) === req.user.id) {
+      return res.status(400).json({ error: "Admins cannot delete their own account." });
+    }
+
+    const [result] = await db.query("DELETE FROM accounts WHERE id = ?", [userId]);
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({ error: "User not found." });
+    }
+
+    res.json({ message: "User deleted successfully." });
+
+  } catch (err) {
+    console.error("❌ Delete user error:", err);
+    res.status(500).json({ error: "Server error deleting user." });
+  }
+});
 
 app.listen(PORT, () => {
   console.log(`🚀 Password Security Quiz Server running at http://localhost:${PORT}`)
