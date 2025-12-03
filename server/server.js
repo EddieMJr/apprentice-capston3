@@ -35,10 +35,14 @@ app.use(
       }
       return callback(new Error("Not allowed by CORS"))
     },
-    methods: ["GET", "POST"],
+    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
+    optionsSuccessStatus: 200,
   }),
 )
+
+app.options("*", cors());
 
 app.use(express.json())
 
