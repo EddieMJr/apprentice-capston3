@@ -26,7 +26,7 @@ function ProtectedRoute({ children, allowed }) {
 
   if (!user) {
     // nobody logged in  directed as guest
-    return <Navigate to="/login" replace />
+    return <Navigate to="/login/" replace />
   }
 
   if (!allowed.includes(user.role)) {
@@ -42,9 +42,9 @@ function Layout() {
   const location = useLocation()
   const path = location.pathname
 
-  const guestPages = ["/", "/login", "/register"]
-  const userPages = ["/dashboard", "/game", "/quiz"]
-  const adminPages = ["/admin"]
+  const guestPages = ["/", "/login/", "/register/"]
+  const userPages = ["/dashboard/", "/game/", "/quiz/"]
+  const adminPages = ["/admin/"]
 
   return (
     <>
@@ -55,12 +55,12 @@ function Layout() {
       <Routes>
         {/* Public */}
         <Route path="/" element={<Home />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/login/" element={<Login />} />
+        <Route path="/register/" element={<Register />} />
 
         {/* User-only pages */}
         <Route
-          path="/dashboard"
+          path="/dashboard/"
           element={
             <ProtectedRoute allowed={["user", "admin"]}>
               <Dashboard />
@@ -68,7 +68,7 @@ function Layout() {
           }
         />
         <Route
-          path="/game"
+          path="/game/"
           element={
             <ProtectedRoute allowed={["user", "admin"]}>
               <Game />
@@ -76,7 +76,7 @@ function Layout() {
           }
         />
         <Route
-          path="/quiz"
+          path="/quiz/"
           element={
             <ProtectedRoute allowed={["user", "admin"]}>
               <QuizGeneration />
@@ -86,7 +86,7 @@ function Layout() {
 
         {/* Admin-only page */}
         <Route
-          path="/admin"
+          path="/admin/"
           element={
             <ProtectedRoute allowed={["admin"]}>
               <AdminDashboard />
