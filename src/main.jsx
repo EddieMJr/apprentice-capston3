@@ -10,7 +10,7 @@ import Dashboard from "./pages/Dashboard.jsx"
 import Login from "./pages/Login.jsx"
 import Register from "./pages/Register.jsx"
 import QuizGeneration from "./pages/PasswordSecurityQuiz.jsx"
-import Game from "./components/Game.jsx"
+import Game from "./components/game.jsx"
 
 import Footer from "./components/Footer.jsx"
 
