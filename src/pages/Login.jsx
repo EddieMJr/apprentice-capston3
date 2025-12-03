@@ -37,6 +37,7 @@ const Login = () => {
     try {
       setLoading(true);
       setErrors({});
+
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -47,19 +48,21 @@ const Login = () => {
 
       if (!res.ok) {
         throw new Error(data.error || "Invalid username or password.");
-      } 
+      }
 
-      setMessage("Login successful!");
       localStorage.setItem("token", data.token);
       localStorage.setItem("user", JSON.stringify(data.user));
+
+      setMessage("Login successful!");
 
       setTimeout(() => {
         if (data.user.role === "admin") {
           window.location.href = "/admin";
         } else {
-          window.location.href = "/dashboard"
+          window.location.href = "/dashboard";
         }
       }, 1000);
+
     } catch (err) {
       setMessage(`Error: ${err.message}`);
     } finally {
@@ -70,7 +73,7 @@ const Login = () => {
   return (
     <main className="login-container">
       <form className="login-form" onSubmit={handleSubmit}>
-        <img className="mb-4 login-logo" src="/capstone.png" alt="LockBox logo"/>
+        <img className="mb-4 login-logo" src="/capstone.png" alt="LockBox logo" />
         <h1 className="h3 mb-3 fw-normal">Please Login</h1>
 
         {message && <p className="form-message">{message}</p>}
@@ -109,7 +112,6 @@ const Login = () => {
           </label>
         </div>
 
-        {/* UPDATED BUTTON */}
         <button
           className="btn login-btn w-100 py-2"
           type="submit"
@@ -120,9 +122,7 @@ const Login = () => {
 
         <p className="mt-3 mb-0 text-muted">
           Don’t have an account?{" "}
-          <a href="/register" className="create-account-link">
-            Create one
-          </a>
+          <a href="/register" className="create-account-link">Create one</a>
         </p>
 
         <p className="mt-5 mb-3 text-muted small">© 2025 LockBox</p>
@@ -132,4 +132,5 @@ const Login = () => {
 };
 
 export default Login;
+
 
