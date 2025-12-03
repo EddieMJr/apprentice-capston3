@@ -196,7 +196,7 @@ app.post("/api/generate-quiz", async (req, res) => {
   try {
     const prompt = `
 You are a professional password security quiz generator.
-Create exactly ${questionCount} distinct quiz questions about password security for a ${expertise} level learner.
+Create exactly ${questionCount} distinct quiz open ended questions about password security for a ${expertise} level learner.
 
 Focus areas based on difficulty:
 - Beginner: Basic concepts like password length, character types, common mistakes
@@ -251,6 +251,7 @@ Consider:
 - Factual accuracy about password security best practices
 - Understanding of security concepts
 - Reasonable variations in wording are acceptable
+- The user's answer should be based on factual information, not personal opinion or assumptions (e.g., "I don't know" is not acceptable).
 
 Respond **only** in valid JSON:
 {

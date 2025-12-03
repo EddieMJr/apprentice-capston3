@@ -12,7 +12,7 @@ describe("Login Page Tests", () => {
   });
 
   it("should show error for short password", () => {
-    cy.get("#floatingUsername").type("eddiemjr");
+    cy.get("#floatingUsername").type("test123");
     cy.get("#floatingPassword").type("123"); // MUST be short
     cy.get("button[type='submit']").click();
     cy.contains("Password must be at least 6 characters long.").should("be.visible");
