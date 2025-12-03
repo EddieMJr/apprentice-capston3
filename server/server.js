@@ -124,12 +124,21 @@ app.post("/api/login", async (req, res) => {
 
     // CREATE JWT TOKEN HERE
     const token = jwt.sign(
-      { id: user.id, username: user.username },
+      { id: user.id, username: user.username, firstName: user.firstName },
       process.env.JWT_SECRET,
       { expiresIn: "7d" }
     );
 
-    res.json({ message: "Login successful!", token, user: userWithoutPassword });
+    res.json({ message: "Login successful!", token, user: {
+      id: user.id,
+      username: user.username,
+      email: user.email,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      role: user.role,
+      xp: user.xp,
+      totalAttempts: user.totalAttempts,
+  } });
   } catch (err) {
     console.error("❌ Login error:", err);
     res.status(500).json({ error: "Server error. Please try again." });
@@ -138,7 +147,7 @@ app.post("/api/login", async (req, res) => {
 
 app.get("/api/accounts", async (req, res) => {
   try {
-    const [rows] = await db.query("SELECT id, username, email, firstName, lastName, xp, totalAttempts FROM accounts");
+    const [rows] = await db.query("SELECT id, username, email, firstName, lastName, xp, totalAttempts, role FROM accounts");
     res.json({ accounts: rows });
   } catch (err) {
     console.error("❌ Failed to fetch accounts:", err);
@@ -166,16 +175,21 @@ app.post("/api/update-stats", authenticateToken, async (req, res) => {
     }
 
     const [updatedRows] = await db.query(
-      "SELECT id, username, xp, totalAttempts FROM accounts WHERE id = ?",
+      "SELECT id, username, email, firstName, lastName, xp, totalAttempts, role FROM accounts WHERE id = ?",
       [req.user.id]
     );
 
-    res.json({ message: "Stats updated successfully!", user: updatedRows[0] });
+    return res.json({ 
+      message: "Stats updated successfully!", 
+      user: updatedRows[0] 
+    });
+
   } catch (err) {
     console.error("❌ Update stats error:", err);
     res.status(500).json({ error: "Server error. Could not update stats." });
   }
 });
+
 
 const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,

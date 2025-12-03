@@ -42,7 +42,7 @@ const Navbar = () => {
       {/* RIGHT SIDE (Desktop only) */}
       <div className="nav-login desktop-only">
         <Link to="/dashboard"><button>Dashboard</button></Link>
-        <Link to="/logout"><button>Logout</button></Link>
+        <Link to="/"><button>Logout</button></Link>
       </div>
     </nav>
   )

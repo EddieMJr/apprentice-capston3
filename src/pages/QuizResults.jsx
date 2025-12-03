@@ -49,16 +49,18 @@ export default function QuizResults({ stats, onRetry }) {
         })
 
         const data = await res.json()
-        localStorage.setItem('user', JSON.stringify(data.user))
+        if (res.ok && data.user) {
+          localStorage.setItem("user", JSON.stringify(data.user))
+          if (typeof setUser === "function") setUser(data.user)
+          setUserStats(data.user)
+        }
+
         console.log("📥 Backend responded:", data)
 
         if (!res.ok) {
           setError(data.error || "Failed to update stats")
         } else {
-          setUserStats({
-            xp: data.user.xp,
-            totalAttempts: data.user.totalAttempts,
-          })
+          setUserStats(data.user)
         }
       } catch (err) {
         console.error("❌ Failed to update stats:", err)
