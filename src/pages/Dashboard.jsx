@@ -36,7 +36,7 @@ function Dashboard() {
 
       {/* Welcome */}
       <h1 className="text-center my-4">
-        Welcome, {user.firstName}!
+        Welcome, {user.username}!
       </h1>
 
       <div className="row">
@@ -137,4 +137,3 @@ function Dashboard() {
 }
 
 export default Dashboard;
-

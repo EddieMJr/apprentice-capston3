@@ -55,12 +55,12 @@ const Navigate = useNavigate()
 
     // first name
     if (!formData.firstName.trim()) {
-      newErrors.first_name = "First name is required.";
+      newErrors.firstName = "First name is required.";
     }
 
     // last name
     if (!formData.lastName.trim()) {
-      newErrors.last_name = "Last name is required.";
+      newErrors.lastName = "Last name is required.";
     }
 
     // password
@@ -168,7 +168,7 @@ const Navigate = useNavigate()
               value={formData.firstName}
               onChange={handleChange}
             />
-            {errors.first_name && <p className="register--error">{errors.first_name}</p>}
+            {errors.firstName && <p className="register--error">{errors.firstName}</p>}
           </div>
 
           {/* Last Name */}
@@ -182,7 +182,7 @@ const Navigate = useNavigate()
               value={formData.lastName}
               onChange={handleChange}
             />
-            {errors.last_name && <p className="register--error">{errors.last_name}</p>}
+            {errors.lastName && <p className="register--error">{errors.lastName}</p>}
           </div>
 
           {/* Password */}

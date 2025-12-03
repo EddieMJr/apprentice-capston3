@@ -20,7 +20,7 @@
 -- SELECT * FROM accounts;
 
 -- ALTER TABLE accounts
--- ADD COLUMN email VARCHAR(255) NOT NULL AFTER username;
+-- ADD COLUMN role VARCHAR(255) NOT NULL DEFAULT 'user';
 
 -- INSERT INTO accounts (firstName, lastName, username, email, password, xp, totalAttempts)
 -- VALUES
@@ -29,15 +29,15 @@
 -- ("Edgardo", "Torres", "ETnotTheAlien", "et@example.com", "$2b$10$uT1MZLJH0t2FpNcV7JqKauz6q8N3PVxFrRg5jB7RR3D1gr5pPDn9e", 5, 2);
 
 -- UPDATE accounts
--- SET xp = 95
--- WHERE username = 'theOnlyNRice';
+-- SET role = 'admin'
+-- WHERE username = 'eddiemjr';
 
 -- UPDATE accounts
--- SET xp = 80
--- WHERE username = 'ETnotTheAlien';
+-- SET role = 'admin'
+-- WHERE username = 'MrET';
 
 -- UPDATE accounts
--- SET xp = 85
--- WHERE username = 'amyG';
+-- SET role = 'admin'
+-- WHERE username = 'amy_account';
 
 SELECT * FROM accounts;
