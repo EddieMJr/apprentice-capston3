@@ -103,7 +103,7 @@ const Navigate = useNavigate()
         setMessage("Registered! Redirecting to Login Page...")
         setErrors(false)
         // smooth redirection
-        setTimeout(() => Navigate("/login"), 1500);
+        setTimeout(() => Navigate("/login/"), 1500);
       }
 
       setMessage("Registration successful! You can now log in.");

@@ -42,7 +42,7 @@ const NavbarUser = () => {
 
         <ul className={`nav-menu ${isOpen ? 'open' : ''}`}>
           <li className="mobile-only">
-            <Link to="/dashboard" onClick={handleLinkClick}>Dashboard</Link>
+            <Link to="/dashboard/" onClick={handleLinkClick}>Dashboard</Link>
           </li>
 
           <li className="mobile-only">
@@ -52,7 +52,7 @@ const NavbarUser = () => {
       </div>
 
       <div className="nav-login desktop-only">
-        <Link to="/dashboard"><button>Dashboard</button></Link>
+        <Link to="/dashboard/"><button>Dashboard</button></Link>
         <button onClick={handleLogout}>Logout</button>
       </div>
     </nav>

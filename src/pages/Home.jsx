@@ -67,10 +67,10 @@ function Home() {
 
             {/* Two Buttons — internal links */}
             <div className="d-flex flex-column flex-sm-row gap-3">
-              <Link to="/login" className="btn btn-primary btn-lg w-100 w-sm-auto">
+              <Link to="/login/" className="btn btn-primary btn-lg w-100 w-sm-auto">
                 Login
               </Link>
-              <Link to="/register" className="btn btn-primary btn-lg w-100 w-sm-auto">
+              <Link to="/register/" className="btn btn-primary btn-lg w-100 w-sm-auto">
                 Register
               </Link>
             </div>
@@ -141,10 +141,10 @@ function Home() {
 
             {/* Two Buttons — internal links */}
             <div className="d-flex flex-column flex-sm-row gap-3">
-              <Link to="/login" className="btn btn-primary btn-lg w-100 w-sm-auto">
+              <Link to="/login/" className="btn btn-primary btn-lg w-100 w-sm-auto">
                 Login
               </Link>
-              <Link to="/register" className="btn btn-primary btn-lg w-100 w-sm-auto">
+              <Link to="/register/" className="btn btn-primary btn-lg w-100 w-sm-auto">
                 Register
               </Link>
             </div>
