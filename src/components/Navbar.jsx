@@ -31,15 +31,15 @@ const Navbar = () => {
 
         {/* Nav menu (Home, Scanner, and mobile Login/Register) */}
         <ul className={`nav-menu ${isOpen ? 'open' : ''}`}>
-          <li className="mobile-only"><Link to="/login" onClick={handleLinkClick}>Login</Link></li>
-          <li className="mobile-only"><Link to="/register" onClick={handleLinkClick}>Register</Link></li>
+          <li className="mobile-only"><Link to="/login/" onClick={handleLinkClick}>Login</Link></li>
+          <li className="mobile-only"><Link to="/register/" onClick={handleLinkClick}>Register</Link></li>
         </ul>
       </div>
 
       {/* RIGHT SIDE (Desktop only) */}
       <div className="nav-login desktop-only">
-        <Link to="/login"><button>Login</button></Link>
-        <Link to="/register"><button>Register</button></Link>
+        <Link to="/login/"><button>Login</button></Link>
+        <Link to="/register/"><button>Register</button></Link>
       </div>
     </nav>
   )
