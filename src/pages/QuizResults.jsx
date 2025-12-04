@@ -10,11 +10,11 @@ export default function QuizResults({ stats, onRetry }) {
     stats.correct + stats.wrong > 0 ? Math.round((stats.correct / (stats.correct + stats.wrong)) * 100) : 0
   
   const getResultMessage = (accuracy) => {
-    if (accuracy === 100) return "Perfect! You're a security master! 👑"
-    if (accuracy >= 80) return "Excellent! Great security knowledge! 🌟"
-    if (accuracy >= 60) return "Good job! Keep improving! 💪"
-    if (accuracy >= 40) return "Not bad! Practice more! 📚"
-    return "Keep learning! You'll get there! 🚀"
+    if (accuracy === 100) return "Perfect! You're a security master!"
+    if (accuracy >= 80) return "Excellent! Great security knowledge!"
+    if (accuracy >= 60) return "Good job! Keep improving!"
+    if (accuracy >= 40) return "Not bad! Practice more!"
+    return "Keep learning! You'll get there!"
   }
 
    const hasUpdated = useRef(false)

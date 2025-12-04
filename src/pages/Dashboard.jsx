@@ -51,16 +51,20 @@ function Dashboard() {
 
               <div className="row g-3 justify-content-center">
                 <div className="col-10 col-md-5">
-                  <div className="card text-white text-center p-3 shadow-sm"
-                       style={{ backgroundColor: '#bb7420' }}>
+                  <div
+                    className="card text-white text-center p-3 shadow-sm"
+                    style={{ backgroundColor: '#bb7420' }}
+                  >
                     <h5 className="mb-1">Total Points</h5>
                     <p className="fw-bold fs-4">{user.xp} xp</p>
                   </div>
                 </div>
 
                 <div className="col-10 col-md-5">
-                  <div className="card text-white text-center p-3 shadow-sm"
-                       style={{ backgroundColor: '#bb7420' }}>
+                  <div
+                    className="card text-white text-center p-3 shadow-sm"
+                    style={{ backgroundColor: '#bb7420' }}
+                  >
                     <h5 className="mb-1">Total Attempts</h5>
                     <p className="fw-bold fs-4">{user.totalAttempts}</p>
                   </div>
@@ -69,32 +73,40 @@ function Dashboard() {
             </div>
           </div>
 
-          {/* Available Games */}
+          {/* Security Skills & Assessment */}
           <div className="card shadow mb-4">
-            <div className="card-body" style={{ padding: '3rem' }}>
+            <div className="card-body" style={{ padding: "3rem" }}>
               <h2 className="text-center mb-4">Security Skills & Assessment</h2>
 
               <div className="row g-4 justify-content-center">
 
-                {/* Password Cracker */}
+                {/* Password Evaluator */}
                 <div className="col-10 col-md-5">
-                  <div
-                    className="game-button card text-center shadow-sm p-4"
-                    onClick={() => (window.location.href = "/game")}
-                  >
-                    <h5 className="fw-bold">Password Evaluator</h5>
-                    <p>See how secure your password is!</p>
+                  <div className="game-card-modern text-center p-4 shadow-sm">
+                    <h4 className="fw-bold mb-2">Password Evaluator</h4>
+                    <p className="text-light">See how secure your password really is.</p>
+
+                    <button
+                      className="btn get-started-btn mt-3 fixed-btn"
+                      onClick={() => (window.location.href = "/game")}
+                    >
+                      Get Started →
+                    </button>
                   </div>
                 </div>
 
                 {/* Knowledge Quiz */}
                 <div className="col-10 col-md-5">
-                  <div
-                    className="game-button card text-center shadow-sm p-4"
-                    onClick={() => (window.location.href = "/quiz")}
-                  >
-                    <h5 className="fw-bold">Knowledge Quiz</h5>
-                    <p>Test your Cyber Security Knowledge!</p>
+                  <div className="game-card-modern text-center p-4 shadow-sm">
+                    <h4 className="fw-bold mb-2">Knowledge Quiz</h4>
+                    <p className="text-light">Test your cybersecurity knowledge.</p>
+
+                    <button
+                      className="btn get-started-btn mt-3 fixed-btn"
+                      onClick={() => (window.location.href = "/quiz")}
+                    >
+                      Get Started →
+                    </button>
                   </div>
                 </div>
 
@@ -137,3 +149,4 @@ function Dashboard() {
 }
 
 export default Dashboard;
+

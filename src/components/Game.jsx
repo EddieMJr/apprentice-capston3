@@ -41,7 +41,7 @@ export default function PasswordCrackGame() {
     const years = seconds / 31536000n
     if (years < 100n) return `${years} years`
     if (years < 1_000_000n) return `${years} years (pretty strong!)`
-    if (years < 1_000_000_000n) return `${years} years 🤯 (uncrackable by modern computers)`
+    if (years < 1_000_000_000n) return `${years} years (uncrackable by modern computers)`
 
     return "Longer than the age of the universe 😭🔥"
   }
@@ -103,7 +103,7 @@ export default function PasswordCrackGame() {
 
       <div className="hack-card">
         <div className="title-section">
-          <h1 className="hack-title">💻 Hacker Password Cracker</h1>
+          <h1 className="hack-title">Hacker Password Cracker</h1>
           <p className="subtitle">Test your password strength against modern attacks</p>
         </div>
 
@@ -122,7 +122,7 @@ export default function PasswordCrackGame() {
           </div>
 
           <button className={`hack-button ${loading ? "loading" : ""}`} onClick={handleCheck} disabled={loading}>
-            {loading ? "🔓 Hacking..." : "Start Hack 🔓"}
+            {loading ? "Hacking..." : "Start Hack"}
           </button>
         </div>
 
