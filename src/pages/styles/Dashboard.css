@@ -62,27 +62,70 @@ body {
     flex-wrap: wrap;
 }
 
-.game-card {
-    background: var(--secondary);
+/* MODERN DARK GAME CARDS */
+
+
+.game-card-modern {
+    background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 1rem;
     color: white;
-    width: 200px;
-    height: 150px;
-    border-radius: var(--radius);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.15rem;
-    box-shadow: var(--shadow);
+    padding: 2rem;
     transition: transform 0.25s ease, box-shadow 0.25s ease;
     cursor: pointer;
+    height: 30vh;
 }
 
-.game-card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0px 6px 18px rgba(0,0,0,0.18);
+.game-card-modern:hover {
+    transform: translateY(-6px);
+    box-shadow: 0px 8px 22px rgba(0, 0, 0, 0.35);
 }
 
-/* ---- Game Buttons (Orange) ---- */
+/* ---- Orange Start Button ---- */
+.get-started-btn {
+    background: #BB7420;
+    color: white;
+    font-weight: 600;
+    border-radius: 0.6rem;
+    transition: background 0.25s ease, transform 0.25s ease;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Hover */
+.get-started-btn:hover {
+    background: #d98a2f;
+    transform: translateY(-3px);
+}
+
+/*  FIXED BUTTON SIZE — ALWAYS SAME SIZE */
+.fixed-btn {
+    width: 180px;
+    height: 50px;
+    font-size: 1rem;
+    padding: 0; /* prevents text from stretching the button */
+}
+
+/* Tablet */
+@media (max-width: 768px) {
+    .fixed-btn {
+        width: 180px;
+        height: 50px;
+        font-size: 1rem;
+    }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+    .fixed-btn {
+        width: 180px;
+        height: 50px;
+        font-size: 1rem;
+    }
+}
+
+/* ---- Old Orange Cards (kept only for compatibility) ---- */
 .game-button {
     background: #BB7420 !important;
     color: white !important;
@@ -105,3 +148,4 @@ body {
     margin: 0;
     opacity: 0.85;
 }
+
