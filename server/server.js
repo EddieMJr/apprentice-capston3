@@ -195,59 +195,80 @@ const ai = new GoogleGenAI({
 })
 
 app.post("/api/generate-quiz", async (req, res) => {
-  const { difficulty, number } = req.body
+  const { difficulty, number } = req.body;
 
+
+  const diff = (difficulty || "").toLowerCase().trim();
   const expertiseMap = {
     novice: "beginner",
     intermediate: "intermediate",
     expert: "advanced",
-  }
+  };
 
-  const expertise = expertiseMap[difficulty?.toLowerCase()] || "beginner"
-  const questionCount = number || 5
+  const expertise = expertiseMap[diff];
+  const questionCount = number || 5;
 
   try {
     const prompt = `
-You are a professional password security quiz generator.
-Create exactly ${questionCount} distinct quiz open ended questions about password security for a ${expertise} level learner.
+You are an expert password security quiz generator.
 
-Focus areas based on difficulty:
-- Beginner: Basic concepts like password length, character types, common mistakes
-- Intermediate: Best practices, password managers, two-factor authentication, security risks
-- Advanced: Advanced threats like rainbow tables, brute force attacks, encryption, security architecture
+Generate EXACTLY ${questionCount} UNIQUE open-ended questions
+for a **${expertise}-level** learner.
 
-VERY IMPORTANT RULES:
-- Only return numbered questions in this exact format:
-1. Question one?
-2. Question two?
-3. ...
-- Do NOT include any introductions, titles, explanations, or text before question 1.
-- Do NOT include answers or hints.
-Only output the numbered questions, nothing else.
-`
+STRICT RULES:
+- OUTPUT MUST START WITH "1." AS THE FIRST CHARACTER
+- FORMAT MUST BE:
+1. Question?
+2. Question?
+3. Question?
+- NO INTRODUCTION, NO TITLES, NO EXPLANATIONS
+- NO ANSWERS
+- NO OPTIONS (because these are open-ended questions)
+- DO NOT REPEAT QUESTIONS
+- DO NOT ADD ANY TEXT BEFORE OR AFTER THE NUMBERED QUESTIONS
+
+Focus areas based on difficulty: 
+- Beginner: Basic concepts like password length, character types, common mistakes. 
+- Intermediate: Best practices, password managers, two-factor authentication, security risks.
+- Advanced: Advanced threats like rainbow tables, brute force attacks, encryption, security architecture.
+
+If you add anything before "1." the output is INVALID.
+If you repeat a question, the output is INVALID.
+
+Output ONLY the numbered questions and NOTHING else.
+`;
 
     const response = await ai.models.generateContent({
       model: "gemini-2.0-flash",
       contents: [{ role: "user", parts: [{ text: prompt }] }],
-    })
+    });
 
-    const text = response?.candidates?.[0]?.content?.parts?.[0]?.text?.trim() || ""
+    let text = response?.candidates?.[0]?.content?.parts?.[0]?.text || "";
+    text = text.trim();
 
-    if (!text) throw new Error("No valid text returned from Gemini")
+    // FIX: ensure text starts at question 1
+    const startIndex = text.indexOf("1.");
+    if (startIndex > 0) {
+      text = text.substring(startIndex);
+    }
 
-    const cleanedText = text.replace(/^.*?(?=\n?1\.)/, "").trim()
+    // FIX: split and clean questions
+    const questions = text
+      .split(/\n\d+\.\s+/)
+      .filter((q, i) => q.trim() !== "" && i > 0) // remove empty first element
+      .map((q) => q.trim());
 
-    const questions = cleanedText
-      .split(/\n\d+\.\s*/)
-      .filter((q) => q.trim() !== "")
-      .map((q) => q.trim())
+    if (questions.length === 0) {
+      throw new Error("AI returned invalid output");
+    }
 
-    res.json({ questions })
+    res.json({ questions });
+
   } catch (error) {
-    console.error("❌ Quiz generation error:", error)
-    res.status(500).json({ error: "Failed to generate quiz." })
+    console.error("❌ Quiz generation error:", error);
+    res.status(500).json({ error: "Failed to generate quiz." });
   }
-})
+});
 
 app.post("/api/evaluate-answer", async (req, res) => {
   const { question, userAnswer } = req.body
