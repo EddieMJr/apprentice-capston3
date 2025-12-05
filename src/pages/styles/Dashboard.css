@@ -15,65 +15,22 @@ body {
     font-family: system-ui, sans-serif;
 }
 
-/* ---- Section Cards ---- */
-.section {
-    background: var(--card-bg);
-    padding: 2rem;
-    margin: 1.5rem 1rem;
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    height: 30vh;
-}
-
-/* ---- Headers ---- */
-.section h2 {
-    text-align: center;
-    color: var(--text-dark);
-    margin-bottom: 1rem;
-}
-
-/* ---- Stats Section ---- */
-.stats-grid {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-}
-
-.stat-card {
-    background: var(--primary);
-    color: white;
-    padding: 1.5rem 2rem;
-    border-radius: var(--radius);
-    min-width: 180px;
-    text-align: center;
-    font-weight: 600;
-    box-shadow: var(--shadow);
-}
-
-/* ---- Game Section ---- */
-.game-options {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
-}
-
-/* MODERN DARK GAME CARDS */
-
-
 .game-card-modern {
     background: linear-gradient(135deg, #1a1a1a, #2a2a2a);
     border: 1px solid rgba(255, 255, 255, 0.08);
     border-radius: 1rem;
     color: white;
     padding: 2rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* keep content top aligned */
+    align-items: center;
+
+    height: 100%;
+    min-height: 270px;
+
     transition: transform 0.25s ease, box-shadow 0.25s ease;
-    cursor: pointer;
-    height: 30vh;
 }
 
 .game-card-modern:hover {
@@ -81,71 +38,67 @@ body {
     box-shadow: 0px 8px 22px rgba(0, 0, 0, 0.35);
 }
 
-/* ---- Orange Start Button ---- */
 .get-started-btn {
     background: #BB7420;
     color: white;
     font-weight: 600;
     border-radius: 0.6rem;
     transition: background 0.25s ease, transform 0.25s ease;
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
 }
 
-/* Hover */
 .get-started-btn:hover {
     background: #d98a2f;
     transform: translateY(-3px);
 }
 
-/*  FIXED BUTTON SIZE — ALWAYS SAME SIZE */
 .fixed-btn {
     width: 180px;
     height: 50px;
     font-size: 1rem;
-    padding: 0; /* prevents text from stretching the button */
+    align-self: center;
+
+    /* keep button at bottom */
+    margin-top: auto;
 }
 
-/* Tablet */
+/*                  RESPONSIVE MEDIA QUERIES             */
+@media (max-width: 992px) {
+    .game-card-modern {
+        min-height: 250px;
+        padding: 1.75rem;
+    }
+}
+
 @media (max-width: 768px) {
+    .game-card-modern {
+        min-height: 240px;
+    }
     .fixed-btn {
-        width: 180px;
-        height: 50px;
-        font-size: 1rem;
+        width: 170px;
+        height: 48px;
     }
 }
 
-/* Small phones */
+@media (max-width: 576px) {
+    .game-card-modern {
+        min-height: 230px;
+    }
+    .fixed-btn {
+        width: 160px;
+        height: 45px;
+    }
+}
+
 @media (max-width: 480px) {
+    .game-card-modern {
+        min-height: 220px;
+        padding: 1.5rem;
+    }
     .fixed-btn {
-        width: 180px;
-        height: 50px;
-        font-size: 1rem;
+        width: 150px;
+        height: 42px;
     }
 }
 
-/* ---- Old Orange Cards (kept only for compatibility) ---- */
-.game-button {
-    background: #BB7420 !important;
-    color: white !important;
-    border-radius: var(--radius);
-    cursor: pointer;
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
 
-.game-button:hover {
-    transform: translateY(-4px);
-    box-shadow: 0px 6px 18px rgba(0,0,0,0.18);
-    background: #d98a2f !important;
-}
-
-.game-button h5 {
-    margin-bottom: 0.5rem;
-}
-
-.game-button p {
-    margin: 0;
-    opacity: 0.85;
-}
 

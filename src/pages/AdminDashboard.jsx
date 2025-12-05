@@ -6,7 +6,7 @@ export default function AdminDashboard() {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
-    // Fetch all users
+  // Fetch all users
   const fetchUsers = async () => {
     try {
       const res = await fetch(`${import.meta.env.VITE_API_URL}/api/accounts`, {
@@ -54,7 +54,6 @@ export default function AdminDashboard() {
     }
   };
 
-
   useEffect(() => {
     fetchUsers();
   }, []);
@@ -68,43 +67,47 @@ export default function AdminDashboard() {
       <div className="card shadow p-4">
         <h2 className="text-center mb-4">User Management</h2>
 
-        <table className="table table-striped table-hover text-center admin-table">
-          <thead className="table-dark">
-            <tr>
-              <th>#</th>
-              <th>Username</th>
-              <th>Email</th>
-              <th>XP</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-
-          <tbody>
-            {users.length === 0 && (
+        {/* Scroll wrapper for mobile */}
+        <div className="table-responsive-wrapper">
+          <table className="table table-striped table-hover text-center admin-table">
+            <thead className="table-dark">
               <tr>
-                <td colSpan="5" className="text-muted">No users found.</td>
+                <th>#</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>XP</th>
+                <th>Actions</th>
               </tr>
-            )}
+            </thead>
 
-            {users.map((user, i) => (
-              <tr key={user.id}>
-                <td>{i + 1}</td>
-                <td>{user.username}</td>
-                <td>{user.email}</td>
-                <td>{user.xp}</td>
-                <td>
-                  <button
-                    className="btn btn-danger btn-sm delete-btn"
-                    onClick={() => handleDelete(user.id)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+            <tbody>
+              {users.length === 0 && (
+                <tr>
+                  <td colSpan="5" className="text-muted">No users found.</td>
+                </tr>
+              )}
+
+              {users.map((user, i) => (
+                <tr key={user.id}>
+                  <td>{i + 1}</td>
+                  <td>{user.username}</td>
+                  <td>{user.email}</td>
+                  <td>{user.xp}</td>
+                  <td>
+                    <button
+                      className="btn btn-danger btn-sm delete-btn"
+                      onClick={() => handleDelete(user.id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   );
 }
+
