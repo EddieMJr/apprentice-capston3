@@ -27,7 +27,7 @@ LockBox is a web application designed to educate users about password safety and
 - Express  
 - JSON Web Tokens (JWT)  
 - MySQL Database  
-- Hosted on Render (or AWS — update as needed)
+- Hosted on Render
 
 ---
 
