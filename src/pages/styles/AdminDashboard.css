@@ -16,7 +16,7 @@
   transform: scale(0.95);
 }
 
-/* Consistent with your orange theme */
+/* Orange theme */
 :root {
   --primary-orange: #BB7420;
 }
@@ -34,4 +34,53 @@ h1, h2 {
 .admin-table tbody tr:hover {
   background: rgba(187, 116, 32, 0.08);
   transition: 0.2s;
+}
+
+/*   MOBILE TABLE SCROLL WRAPPER   */
+.table-responsive-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.table-responsive-wrapper table {
+  min-width: 600px; 
+}
+
+
+/*           MEDIA QUERIES         */
+/* Tablets + landscape phones */
+@media (max-width: 768px) {
+  .admin-container h1 {
+    font-size: 1.75rem;
+  }
+
+  .admin-container h2 {
+    font-size: 1.25rem;
+  }
+
+  .card {
+    padding: 1rem !important;
+  }
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+  .admin-container {
+    padding: 0 10px;
+  }
+
+  .card {
+    padding: 0.75rem !important;
+  }
+
+  .delete-btn {
+    padding: 4px 8px;
+    font-size: 0.75rem;
+  }
+
+  .table-responsive-wrapper {
+    border: 1px solid rgba(0,0,0,0.1);
+    border-radius: 6px;
+  }
 }

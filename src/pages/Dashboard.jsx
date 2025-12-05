@@ -34,7 +34,6 @@ function Dashboard() {
   return (
     <div className="container py-4">
 
-      {/* Welcome */}
       <h1 className="text-center my-4">
         Welcome, {user.username}!
       </h1>
@@ -82,12 +81,14 @@ function Dashboard() {
 
                 {/* Password Evaluator */}
                 <div className="col-10 col-md-5">
-                  <div className="game-card-modern text-center p-4 shadow-sm">
+                  <div className="game-card-modern text-center p-4 shadow-sm d-flex flex-column">
                     <h4 className="fw-bold mb-2">Password Evaluator</h4>
-                    <p className="text-light">See how secure your password really is.</p>
+                    <p className="text-light">
+                      See how secure your password really is.
+                    </p>
 
                     <button
-                      className="btn get-started-btn mt-3 fixed-btn"
+                      className="btn get-started-btn mt-auto fixed-btn"
                       onClick={() => (window.location.href = "/game")}
                     >
                       Get Started →
@@ -97,12 +98,14 @@ function Dashboard() {
 
                 {/* Knowledge Quiz */}
                 <div className="col-10 col-md-5">
-                  <div className="game-card-modern text-center p-4 shadow-sm">
+                  <div className="game-card-modern text-center p-4 shadow-sm d-flex flex-column">
                     <h4 className="fw-bold mb-2">Knowledge Quiz</h4>
-                    <p className="text-light">Test your cybersecurity knowledge.</p>
+                    <p className="text-light">
+                      Test your cybersecurity knowledge.
+                    </p>
 
                     <button
-                      className="btn get-started-btn mt-3 fixed-btn"
+                      className="btn get-started-btn mt-auto fixed-btn"
                       onClick={() => (window.location.href = "/quiz")}
                     >
                       Get Started →
@@ -116,7 +119,7 @@ function Dashboard() {
 
         </div>
 
-        {/* LEADERBOARD RIGHT COLUMN */}
+        {/* RIGHT COLUMN — LEADERBOARD */}
         <div className="col-12 col-lg-4">
           <div className="card shadow p-3 mb-4">
             <h2 className="text-center mb-3">Leaderboard</h2>
@@ -149,4 +152,5 @@ function Dashboard() {
 }
 
 export default Dashboard;
+
 
